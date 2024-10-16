@@ -1,24 +1,34 @@
 import { useState } from "react";
 
 export const useSubmit = () => {
-  const [response, setResponse] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const submit = async (formData) => {
-    setIsLoading(true);
+    setLoading(true);
+    setError(null);
 
-    // Simulate an API request
-    setTimeout(() => {
-      const isSuccess = Math.random() > 0.5; // Random success or error
-      const responseType = isSuccess ? "success" : "error";
-      const message = isSuccess
-        ? "Form submitted successfully!"
-        : "There was an error submitting the form.";
+    try {
+      // fake API call
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
 
-      setResponse({ type: responseType, message });
-      setIsLoading(false);
-    }, 2000); // Simulated network delay
+      return { type: "success", message: "Form submitted successfully" };
+    } catch (err) {
+      setError(err.message);
+      return { type: "error", message: err.message };
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { submit, response, isLoading };
+  return { submit, loading, error };
 };

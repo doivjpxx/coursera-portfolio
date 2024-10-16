@@ -3,6 +3,7 @@ import {
   FormErrorMessage,
   Input,
   Textarea,
+  Text,
   Box,
   Button,
   Heading,
@@ -11,15 +12,56 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSubmit } from "./useSubmit";
+import { useAlertContext } from "./alertContext";
+import { useEffect } from "react";
+
+function SuccessPopup({ title, msg }) {
+  return (
+    <Box
+      position="fixed"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      padding="8"
+      background="green"
+      borderRadius="lg"
+      boxShadow="md"
+      zIndex="1000"
+    >
+      <Heading as="h3">{title}</Heading>
+      <Text>{msg}</Text>
+    </Box>
+  );
+}
+
+function FailPopup({ title, msg }) {
+  return (
+    <Box
+      position="fixed"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      padding="8"
+      background="red"
+      borderRadius="lg"
+      boxShadow="md"
+      zIndex="1000"
+    >
+      <Heading as="h3">{title}</Heading>
+      <Text>{msg}</Text>
+    </Box>
+  );
+}
 
 function ContactMeSection() {
-  const { submit, response, isLoading } = useSubmit();
+  const { submit, isLoading } = useSubmit();
+  const { onOpen, data } = useAlertContext();
 
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
-      type: "",
+      type: "freelance",
       comment: "",
     },
     validationSchema: Yup.object({
@@ -28,11 +70,28 @@ function ContactMeSection() {
       type: Yup.string().required("Required"),
       comment: Yup.string().required("Required"),
     }),
-    onSubmit: (values, { resetForm }) => {
-      submit(values);
+    onSubmit: async (values, { resetForm }) => {
+      const response = await submit(values);
+
       if (response.type === "success") {
-        alert(`Thank you, ${values.name}!`);
+        onOpen({
+          title: "Success!",
+          description: `Thank you, ${values.firstName}! Your form has been submitted.`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+
         resetForm();
+      } else {
+        onOpen({
+          title: "Error",
+          description:
+            "There was an issue submitting your form. Please try again.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     },
   });
@@ -91,9 +150,18 @@ function ContactMeSection() {
         <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
       </FormControl>
 
-      <Button type="submit" isLoading={isLoading}>
+      <Button type="submit" isLoading={isLoading} className="w-100">
         Submit
       </Button>
+      {data?.status === "success" && (
+        <SuccessPopup title="Success!" msg="Your form has been submitted." />
+      )}
+      {data?.status === "error" && (
+        <FailPopup
+          title="Error"
+          msg="There was an issue submitting your form."
+        />
+      )}
     </Box>
   );
 }

@@ -1,13 +1,7 @@
 import { HStack, Box, Text, Flex, Link } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import {
-  faGithub,
-  faLinkedin,
-  faMedium,
-  faStackOverflow,
-} from "@fortawesome/free-brands-svg-icons";
-import { useMemo, useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 
 const useScrollDirection = () => {
   const previousScrollPosition = useRef(0);
@@ -34,32 +28,8 @@ const useScrollDirection = () => {
   return scrollDirection;
 };
 
-function Header() {
+function Header({ items, socials }) {
   const scrollDirection = useScrollDirection();
-  const socials = useMemo(() => {
-    return [
-      {
-        icon: faEnvelope,
-        url: "mailto:",
-      },
-      {
-        icon: faGithub,
-        url: "",
-      },
-      {
-        icon: faLinkedin,
-        url: "",
-      },
-      {
-        icon: faMedium,
-        url: "",
-      },
-      {
-        icon: faStackOverflow,
-        url: "",
-      },
-    ];
-  }, []);
 
   const handleClick = (e) => {
     console.log(e);
@@ -86,16 +56,13 @@ function Header() {
         ))}
       </HStack>
       <HStack spacing={8} py={4}>
-        <Box>
-          <Link href="#projects" onClick={handleClick}>
-            <Text color="white">Projects</Text>
-          </Link>
-        </Box>
-        <Box>
-          <Link href="#contact-me" onClick={handleClick}>
-            <Text color="white">Contact</Text>
-          </Link>
-        </Box>
+        {items.map((item, index) => (
+          <Box key={index}>
+            <Link href={item.href} onClick={handleClick}>
+              <Text color="white">{item.name}</Text>
+            </Link>
+          </Box>
+        ))}
       </HStack>
     </Flex>
   );
