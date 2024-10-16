@@ -9,7 +9,7 @@ const projects = [
     title: "React Space",
     description:
       "Handy tool belt to create amazing AR components in a React app, with redux integration via middleware",
-    imageSrc: "https://placehold.co/400x250",
+    imageSrc: "https://placehold.co/800x450",
     altText: "Project One Image",
   },
   {
@@ -17,14 +17,14 @@ const projects = [
     title: "React Infinite scroll",
     description:
       "A React component that makes it easy to create an infinitely scrolling list",
-    imageSrc: "https://placehold.co/400x250",
+    imageSrc: "https://placehold.co/800x450",
     altText: "Project Two Image",
   },
   {
     id: 3,
     title: "Photo Gallery",
     description: "A simple photo gallery that displays a grid of photos",
-    imageSrc: "https://placehold.co/400x250",
+    imageSrc: "https://placehold.co/800x450",
     altText: "Project Three Image",
   },
   {
@@ -32,14 +32,14 @@ const projects = [
     title: "React Carousel",
     description:
       "A simple and reusable React component that creates a carousel",
-    imageSrc: "https://placehold.co/400x250",
+    imageSrc: "https://placehold.co/800x450",
     altText: "Project Four Image",
   },
 ];
 
 const ProjectsSection = () => {
   return (
-    <Box id="projects-section" padding={8} background="gray.100">
+    <Box id="projects" padding={8} background="gray.100">
       <Heading as="h5">Featured projects</Heading>
       <SimpleGrid columns={[1, null, 2]} spacing={8}>
         {projects.map((project) => (

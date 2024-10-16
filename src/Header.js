@@ -1,13 +1,4 @@
-import {
-  Stack,
-  HStack,
-  VStack,
-  Box,
-  Text,
-  Container,
-  Flex,
-  Link,
-} from "@chakra-ui/react";
+import { HStack, Box, Text, Flex, Link } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -75,40 +66,38 @@ function Header() {
   };
 
   return (
-    <Box
+    <Flex
       transform={
         scrollDirection === "down" ? "translateY(-200px)" : "translateY(0)"
       }
       transition="transform 0.3s"
+      bg="black"
+      justifyContent="space-around"
+      alignItems="center"
+      style={{ position: "fixed", width: "100%", zIndex: 100 }}
     >
-      <Flex bg="black" justifyContent="space-around" alignItems="center">
-        <Container>
-          <HStack spacing={24} py={4}>
-            {socials.map((social, index) => (
-              <Text key={index}>
-                <Link href={social.url}>
-                  <FontAwesomeIcon icon={social.icon} size="2x" color="white" />
-                </Link>
-              </Text>
-            ))}
-          </HStack>
-        </Container>
-        <Container maxW="container.xl">
-          <HStack spacing={24} py={4}>
-            <Box>
-              <Link href="#projects" onClick={handleClick}>
-                <Text color="white">Projects</Text>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="#contact-me" onClick={handleClick}>
-                <Text color="white">Contact</Text>
-              </Link>
-            </Box>
-          </HStack>
-        </Container>
-      </Flex>
-    </Box>
+      <HStack spacing={8} py={4}>
+        {socials.map((social, index) => (
+          <Text key={index}>
+            <Link href={social.url}>
+              <FontAwesomeIcon icon={social.icon} size="2x" color="white" />
+            </Link>
+          </Text>
+        ))}
+      </HStack>
+      <HStack spacing={8} py={4}>
+        <Box>
+          <Link href="#projects" onClick={handleClick}>
+            <Text color="white">Projects</Text>
+          </Link>
+        </Box>
+        <Box>
+          <Link href="#contact-me" onClick={handleClick}>
+            <Text color="white">Contact</Text>
+          </Link>
+        </Box>
+      </HStack>
+    </Flex>
   );
 }
 

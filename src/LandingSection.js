@@ -13,9 +13,11 @@ function LandingSection() {
         src="https://i.pravatar.cc/150?img=7"
         alt="Avatar"
       />
-      <Heading as="h1">{greeting}</Heading>
-      <Text>{bio1}</Text>
-      <Text>{bio2}</Text>
+      <Heading as="h1" color="white">
+        {greeting}
+      </Heading>
+      <Text color="white">{bio1}</Text>
+      <Text color="white">{bio2}</Text>
     </VStack>
   );
 }
