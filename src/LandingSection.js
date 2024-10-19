@@ -1,6 +1,6 @@
 import { VStack, Image, Heading, Text } from "@chakra-ui/react";
 
-function LandingSection({ greeting, bio1, bio2 }) {
+function LandingSection({ greeting, bio1 }) {
   return (
     <VStack align="center" className="w-100 landing-section">
       <Image
@@ -13,7 +13,6 @@ function LandingSection({ greeting, bio1, bio2 }) {
         {greeting}
       </Heading>
       <Text color="white">{bio1}</Text>
-      <Text color="white">{bio2}</Text>
     </VStack>
   );
 }

@@ -49,9 +49,9 @@ function Header({ items, socials }) {
       <HStack spacing={8} py={4}>
         {socials.map((social, index) => (
           <Text key={index}>
-            <Link href={social.url}>
+            <a href={social.url} target="_blank" rel="noreferrer">
               <FontAwesomeIcon icon={social.icon} size="2x" color="white" />
-            </Link>
+            </a>
           </Text>
         ))}
       </HStack>

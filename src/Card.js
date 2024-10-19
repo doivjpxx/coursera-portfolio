@@ -18,9 +18,11 @@ function Card({ project }) {
       </Heading>
       <Text>{project.description}</Text>
       <Box>
-        <Text>
-          See more <FontAwesomeIcon icon={faArrowRight} size="1x" />
-        </Text>
+        <a href="#">
+          <Text>
+            See more <FontAwesomeIcon icon={faArrowRight} size="1x" />
+          </Text>
+        </a>
       </Box>
     </VStack>
   );

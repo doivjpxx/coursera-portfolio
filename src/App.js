@@ -23,23 +23,23 @@ function App() {
   const socials = [
     {
       icon: faEnvelope,
-      url: "mailto:",
+      url: "mailto:huyphongbn24@gmail.com",
     },
     {
       icon: faGithub,
-      url: "",
+      url: "https://github.com/doivjpxx",
     },
     {
       icon: faLinkedin,
-      url: "",
+      url: "https://www.linkedin.com/in/huyphongdev",
     },
     {
       icon: faMedium,
-      url: "",
+      url: "https://medium.com/@doivjpxx",
     },
     {
       icon: faStackOverflow,
-      url: "",
+      url: "https://stackoverflow.com/users/doivjpxx",
     },
   ];
 
@@ -83,9 +83,8 @@ function App() {
         <Box>
           <Header items={navItems} socials={socials} />
           <LandingSection
-            greeting="Hello! I'm Huy Phong"
-            bio1="I'm a passionate developer."
-            bio2="I love creating web applications."
+            greeting="Hello, I am Pete!"
+            bio1="A frontend developer specialised in React"
           />
           <ProjectsSection projects={projects} />
           <ContactMeSection />

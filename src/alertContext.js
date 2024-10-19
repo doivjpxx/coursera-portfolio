@@ -10,8 +10,8 @@ export const useAlertContext = () => {
 export const AlertProvider = ({ children }) => {
   const [data, setData] = useState(null);
 
-  const onOpen = ({ title, description, status, duration, isClosable }) => {
-    setData({ title, description, status, duration, isClosable });
+  const onOpen = ({ name, title, description, status, duration, isClosable }) => {
+    setData({ name, title, description, status, duration, isClosable });
   };
 
   return (

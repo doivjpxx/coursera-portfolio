@@ -68,13 +68,16 @@ function ContactMeSection() {
       name: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
       type: Yup.string().required("Required"),
-      comment: Yup.string().required("Required"),
+      comment: Yup.string()
+        .required("Required")
+        .min(25, "Must be at least 25 characters"),
     }),
     onSubmit: async (values, { resetForm }) => {
       const response = await submit(values);
 
       if (response.type === "success") {
         onOpen({
+          name: values.name,
           title: "Success!",
           description: `Thank you, ${values.firstName}! Your form has been submitted.`,
           status: "success",
@@ -85,6 +88,7 @@ function ContactMeSection() {
         resetForm();
       } else {
         onOpen({
+          name: values.name,
           title: "Error",
           description:
             "There was an issue submitting your form. Please try again.",
@@ -154,12 +158,15 @@ function ContactMeSection() {
         Submit
       </Button>
       {data?.status === "success" && (
-        <SuccessPopup title="Success!" msg="Your form has been submitted." />
+        <SuccessPopup
+          title="All good!"
+          msg={`Thanks for your submission ${data.name}, we will get back to you shortly!`}
+        />
       )}
       {data?.status === "error" && (
         <FailPopup
-          title="Error"
-          msg="There was an issue submitting your form."
+          title="Oops"
+          msg="Something went wrong, please try again later"
         />
       )}
     </Box>
